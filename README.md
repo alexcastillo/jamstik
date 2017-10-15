@@ -8,7 +8,7 @@ WebBluetooth client for the Jamstik+
 
 ## Usage
 
-```
+``` js
 import Jamstik from 'jamstik';
 
 const jamstik = new Jamstik();
