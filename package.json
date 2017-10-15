@@ -1,0 +1,36 @@
+{
+  "name": "jamstik",
+  "version": "0.0.1",
+  "description": "WebBluetooth client for the Jamstik+",
+  "main": "dist/jamstik.umd.js",
+  "module": "src/index.js",
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server",
+    "prepublish": "npm run build"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "jamstik",
+    "ble",
+    "web",
+    "bluetooth",
+    "guitar",
+    "midi",
+    "controller"
+  ],
+  "repository": "https://github.com/alexcastillo/jamstik",
+  "author": "Alex Castillo <alex@castillo.io>",
+  "license": "MIT",
+  "dependencies": {
+    "rxjs": "^5.4.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "webpack": "^3.7.1",
+    "webpack-dev-server": "^2.9.1"
+  }
+}
