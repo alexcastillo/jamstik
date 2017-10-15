@@ -2,8 +2,8 @@
 const onConnectClick = async () => {
     const jamstik = new Jamstik();
     await jamstik.connect();
-    jamstik.midi.subscribe(note => {
-        console.log('note', note);
+    jamstik.midi.subscribe(sample => {
+        console.log('sample', sample);
     });
 };
 
