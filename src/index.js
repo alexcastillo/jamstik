@@ -8,7 +8,7 @@ import {
     CHARACTERISTIC_EVENT
 } from './constants';
 
-export default class Jamstik {
+export class Jamstik {
 
     constructor () {
         this.gatt = null;

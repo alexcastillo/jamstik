@@ -4,12 +4,14 @@
   "description": "WebBluetooth client for the Jamstik+",
   "main": "dist/jamstik.umd.js",
   "module": "src/index.js",
+  "types": "./src/index.d.ts",
   "scripts": {
     "build": "webpack",
     "start": "webpack-dev-server",
     "prepublish": "npm run build"
   },
   "files": [
+    "src",
     "dist"
   ],
   "keywords": [
