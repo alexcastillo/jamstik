@@ -1,4 +1,8 @@
+import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import 'rxjs/add/observable/fromEvent';
+import 'rxjs/add/operator/first';
 import 'rxjs/add/operator/mergeMap';
 
 import {
@@ -16,11 +20,21 @@ export default class Jamstik {
         this.deviceName = null;
         this.service = null;
         this.characteristic = null;
+        this.connectionStatus = new BehaviorSubject(false);
+        
         this.midi = new Subject().mergeMap(this.bufferToSamples);
     }
     
     async connect () {
         this.device = await navigator.bluetooth.requestDevice(DEVICE_OPTIONS);
+        Observable.fromEvent(this.device, 'gattserverdisconnected').first().subscribe(() => {
+            this.gatt = null;
+            this.device = null;
+            this.deviceName = null;
+            this.service = null;
+            this.characteristic = null;
+            this.connectionStatus.next(false);
+        });
         this.gatt = await this.device.gatt.connect();
         this.deviceName = this.gatt.device.name;
         this.service = await this.gatt.getPrimaryService(JAMSTIK_SERVICE_ID);
@@ -29,6 +43,7 @@ export default class Jamstik {
         this.characteristic.addEventListener(CHARACTERISTIC_EVENT, event => {
             this.midi.next(event);
         });
+        this.connectionStatus.next(true);
     }
 
     bufferToSamples (event) {

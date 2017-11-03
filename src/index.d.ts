@@ -10,6 +10,7 @@ export interface IMidiEvent {
 export default class Jamstik {
     deviceName: string;
     midi: Observable<IMidiEvent>;
+    connectionStatus: Observable<boolean>;
     constructor();
     connect(): Promise<void>;
     bufferToSamples(event: any): IMidiEvent[];
