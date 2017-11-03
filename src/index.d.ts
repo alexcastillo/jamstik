@@ -7,7 +7,7 @@ export interface IMidiEvent {
     note: number;
     velocity: number;
 }
-export class Jamstik {
+export default class Jamstik {
     deviceName: string;
     midi: Observable<IMidiEvent>;
     connectionStatus: Observable<boolean>;
