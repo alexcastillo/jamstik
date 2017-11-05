@@ -1,6 +1,6 @@
 {
   "name": "jamstik",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "WebBluetooth client for the Jamstik+",
   "main": "dist/jamstik.umd.js",
   "module": "src/index.js",
