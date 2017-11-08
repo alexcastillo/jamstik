@@ -7,3 +7,5 @@ export const DEVICE_OPTIONS = {
         { services: [JAMSTIK_SERVICE_ID] }
     ]
 };
+
+export const STANDARD_TUNNING = [64, 59, 55, 50, 45, 40];

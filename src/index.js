@@ -2,8 +2,15 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/observable/fromEvent';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/first';
 import 'rxjs/add/operator/mergeMap';
+
+import {
+    samplesMapper,
+    fretboardMapper
+} from './utils';
 
 import {
     DEVICE_OPTIONS,
@@ -22,7 +29,9 @@ export default class Jamstik {
         this.characteristic = null;
         this.connectionStatus = new BehaviorSubject(false);
         
-        this.midi = new Subject().mergeMap(this.bufferToSamples);
+        this.midi = new Subject()
+            .mergeMap(samplesMapper)
+            .map(fretboardMapper);
     }
     
     async connect () {
@@ -46,19 +55,10 @@ export default class Jamstik {
         this.connectionStatus.next(true);
     }
 
-    bufferToSamples (event) {
-        let samples = [];
-        const buffer = new Uint8Array(event.target.value.buffer);
-        const [ header, ...midi ] = Array.from(buffer);
-        while (midi.length) {
-            const [ timestamp, status, note, velocity ] = midi.splice(0, 4);
-            samples.push({ header, timestamp, status, note, velocity }); 
-        }
-        return samples;
-    }
-
     disconnect () {
         if (!this.gatt) { return };
         this.gatt.disconnect();
     }
 }
+
+export * from './utils';
