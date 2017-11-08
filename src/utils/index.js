@@ -27,5 +27,5 @@ export const fretboardMapper = sample => {
       : status - 0x80;
     const fret = note - standardTunning[stringId];
     const playedAt = Date.now();
-    return { ...sample, fret, stringId, playedAt };
+    return Object.assign({}, sample, { fret, stringId, playedAt });
 };

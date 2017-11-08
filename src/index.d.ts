@@ -6,6 +6,8 @@ export interface IMidiEvent {
     status: number;
     note: number;
     velocity: number;
+    stringId?: number;
+    fret?: number;
 }
 export default class Jamstik {
     deviceName: string;
@@ -16,3 +18,6 @@ export default class Jamstik {
     bufferToSamples(event: any): IMidiEvent[];
     disconnect(): void;
 }
+export function isOnFilter (event:IMidiEvent):boolean;
+export function isOffFilter (event:IMidiEvent):boolean;
+export function fretboardMapper (event:IMidiEvent):IMidiEvent;
